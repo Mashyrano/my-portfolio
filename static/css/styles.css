@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/*header*/
+nav {
+    background-color: black;
+    height: 15vh
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+nav ul li {
+    list-style-type: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: x-large;
+    line-height: 15vh;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 0;
+    height: 2px;  /* Adjust the thickness of the underline */
+    background-color: white;
+    transition: width 0.5s ease;  /* Slow transition of the underline */
+}
+
+a:hover::after {
+    width: 80%;  /* Full width of the link */
+}
+
+
+nav ul li i {
+    color: white;
+    margin-right: 10px;
+    margin-left: 20px;
+    font-size: larger
+}
+
+/*home*/
+
+.home-section{
+    background: linear-gradient(to right bottom, black , white );
+    height: 85vh; 
+    padding-top: 200px;
+    padding-left: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.home-section h1 {
+    padding: 10px;
+}
+
+.home-section p {
+   font-weight: bold
+}
+
+.home-section h2 {
+    padding-top: 40px;
+}
+
+@media screen  and (max-width:570px) {
+    .home-section {
+        display: block;
+        padding-top: 80px;
+    }
+    
+    .home-section .text-side {
+        padding-bottom: 70px
+    }
+    nav ul {
+        display: block;
+    }
+    
+    nav ul li a {
+        line-height: 10vh;  
+    }
+    nav {
+        height: 41vh;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
