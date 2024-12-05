@@ -3,18 +3,37 @@
     padding: 0;
 }
 /*header*/
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
 nav {
     display: flex;
     justify-content: space-between; /* Spread out left, center, and right */
-    align-items: center; /* Vertically center items */
+    align-items: center; /* Vertically align items */
     background-color: black;
-    height: 15vh;
+    height: 15vh; /* Set a consistent height */
     padding: 0 20px; /* Add some spacing around the edges */
+}
+
+.nav-left,
+.nav-right {
+    display: flex; /* Ensure the containers are flex containers */
+    align-items: center; /* Vertically align items inside these containers */
+}
+
+.nav-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-center li {
     list-style-type: none;
-    padding-right: 5%;
+    margin: 0 15px; /* Add spacing between links */
 }
 
 .nav-center li a {
@@ -23,13 +42,6 @@ nav {
     font-size: x-large;
     line-height: 15vh;
     position: relative;
-    margin: 0 10px; /* Add spacing between links */
-}
-
-.nav-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .nav-center li a::after {
@@ -47,13 +59,14 @@ nav {
     width: 100%; /* Full width of the link */
 }
 
+.nav-left i,
 .nav-center li i {
     color: white;
     margin-right: 10px;
-    font-size: larger;
+    font-size: x-large; /* Ensure consistent icon size */
+    display: inline-block; /* Keep inline for better alignment */
 }
 
-/* Right section (button) */
 .nav-right .auth-button {
     background-color: white;
     color: black;
@@ -71,10 +84,12 @@ nav {
     border: 1px solid white;
 }
 
-.nav-left i {
-    color: white;
-    font-size: x-large;
+.nav-center li a.active::after {
+    width: 100%;
+    background-color: white;
+    transition: width 0.3s ease; /* Smooth underline transition */
 }
+
 
 /*home*/
 
@@ -137,13 +152,14 @@ nav {
 
 .about-section h1 {
     text-align: center;
-    padding: 80px;
+    padding-top: 30px;
 }
 
 .about {    
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 85vh;
 }
 
 .about .image-side {
@@ -155,7 +171,30 @@ nav {
     padding: 20px;
 }
 
+.about .text-side {
+    width: 40%;
+    font-size: large;
+    font-family: "Playwrite HR Lijeva", serif;
+}
 
+/*Skills*/
+.skills-section {
+    background-color: rgba(31, 29, 29, 0.996);
+    /* height: 100vh; */
+}
+
+.skills-section h1 {
+    text-align: center;
+    padding-top: 30px;
+    color: wheat;
+}
+
+.skills {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
 
 
 

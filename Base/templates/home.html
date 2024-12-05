@@ -1,44 +1,88 @@
-{% extends "base.html" %}
-
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="{% static  'css/styles.css' %}" />        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">  
+    </head>
+    <body>
+        <div class="header">
+            <nav class="nav">
 
-{% block title %} Home {% endblock %}
-
-{% block content %} 
-<div class="home-section">
-    <div class="text-side">
-        <h3>Hello</h3>
-        <h1>I am Mashyrano</h1>
-        <p>Passionate, Conscientious, Creative, Innovative</p>
-        <h2>Web Developer</h2>
-    </div>
-    <div class="image-side">
-        <img id="myImage" src="{% static 'images/bg.png' %}">
-    </div>
-</div>
-{% endblock %}
-{% block about_content %}
-<div class="about-section">
-    <h1>About Me</h1>
-    <div class="about">
-        <div class="image-side">
-            <img src="{% static 'images/bg.png' %}" alt="">
+                <div class="nav-left">
+                    <i class="fa-solid fa-star icon-item"></i>
+                </div>
+                <ul class="nav-center"> 
+                    <li>
+                        <i class="fa-solid fa-house nav-item"></i><a href="#home" class="nav-item active">Home</a>                        
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-question nav-item"></i><a href="#about" class="nav-item">About</a>                        
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-code nav-item"></i><a href="#" class="nav-item">Projects</a>                        
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-address-book nav-item"></i><a href="#" class="nav-item">Contact</a>                        
+                    </li>
+                </ul>           
+                <div class="nav-right">
+                    <button class="auth-button">Login</button>
+                </div>
+            </nav>
         </div>
-        <div class="text-side">
-            <p>A sheep in wolf's clothing</p>
-            <p>Name : Marshall</p>
-            <p>Surname : Mutimbwa</p>
-            <p>Age : 24</p>
-        </div>
-    </div>
-    <h1>Skills</h1>
-    <div class="skills">
 
-    </div>
-    <h1>Education</h1>
-    <div class="education">
+        <div class="section home-section" id="home">
+            <div class="text-side">
+                <h3>Hello</h3>
+                <h1>I am Mashyrano</h1>
+                <p>Passionate, Conscientious, Creative, Innovative</p>
+                <h2>Web Developer</h2>
+            </div>
+            <div class="image-side">
+                <img id="myImage" src="{% static 'images/bg.png' %}">
+            </div>
+        </div>
         
-    </div>
-</div>
-{% endblock %}
-    
+        <div class="section about-section" id="about">
+            <h1>About Me</h1>
+            <div class="about">
+                <div class="image-side">
+                    <img src="{% static 'images/bg.png' %}" alt="">
+                </div>
+                <div class="text-side">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                        enim ad minim veniam, quis nostrud exercitation ullamco
+                    </p>
+                    <br>
+                    <br>
+                    <p>Name : Marshall</p>
+                    <br>
+                    <p>Surname : Mutimbwa</p>
+                    <br>
+                    <p>Age : 24</p>
+                    <br>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section skills-section" id="skills">
+            <h1>Skills</h1>
+            <div class="skills">
+                Genjustu
+            </div>
+        </div>    
+
+        <script>
+            const STATIC_URL = "{% static '' %}";
+        </script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>
