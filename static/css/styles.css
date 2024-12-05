@@ -4,49 +4,76 @@
 }
 /*header*/
 nav {
-    background-color: black;
-    height: 15vh
-}
-
-nav ul {
     display: flex;
-    justify-content: center;
-    align-items: center;    
+    justify-content: space-between; /* Spread out left, center, and right */
+    align-items: center; /* Vertically center items */
+    background-color: black;
+    height: 15vh;
+    padding: 0 20px; /* Add some spacing around the edges */
 }
 
-nav ul li {
+.nav-center li {
     list-style-type: none;
+    padding-right: 5%;
 }
 
-nav ul li a {
+.nav-center li a {
     color: white;
     text-decoration: none;
     font-size: x-large;
     line-height: 15vh;
     position: relative;
+    margin: 0 10px; /* Add spacing between links */
 }
 
-nav ul li a::after {
+.nav-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-center li a::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 10%;
+    left: 0;
     width: 0;
-    height: 2px;  /* Adjust the thickness of the underline */
+    height: 2px; /* Thickness of underline */
     background-color: white;
-    transition: width 0.5s ease;  /* Slow transition of the underline */
+    transition: width 0.3s ease; /* Smooth underline transition */
 }
 
-a:hover::after {
-    width: 80%;  /* Full width of the link */
+.nav-center li a:hover::after {
+    width: 100%; /* Full width of the link */
 }
 
-
-nav ul li i {
+.nav-center li i {
     color: white;
     margin-right: 10px;
-    margin-left: 20px;
-    font-size: larger
+    font-size: larger;
+}
+
+/* Right section (button) */
+.nav-right .auth-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: medium;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-right .auth-button:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.nav-left i {
+    color: white;
+    font-size: x-large;
 }
 
 /*home*/
@@ -80,17 +107,52 @@ nav ul li i {
     
     .home-section .text-side {
         padding-bottom: 70px
-    }
-    nav ul {
+    }    
+    .nav {
         display: block;
     }
+    .nav-center {
+        margin: 20px;
+    }
+}
+
+@media screen  and (max-width:860px) {
+    .nav-center {
+        display: block;
+    }    
     
-    nav ul li a {
+    .nav-center li a {
         line-height: 10vh;  
     }
-    nav {
-        height: 41vh;
+    .nav {
+        height: 60vh;
     }
+}
+
+/* About */
+.about-section {
+    background-color: rgba(210, 207, 207, 0.996);
+    /* height: 100vh; */
+}
+
+.about-section h1 {
+    text-align: center;
+    padding: 80px;
+}
+
+.about {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about .image-side {
+    margin-right: 100px;
+}
+
+.about .image-side img {
+    border: 5px solid black;
+    padding: 20px;
 }
 
 

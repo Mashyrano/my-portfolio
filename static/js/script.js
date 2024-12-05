@@ -17,3 +17,36 @@ $(document).ready(function () {
     });
 
 });
+
+document.addEventListener('wheel', (event) => {
+    event.preventDefault(); // Prevent the default scroll behavior
+
+    // Get all sections
+    const sections = document.querySelectorAll('.section');
+
+    // Get the current scroll position
+    const currentScroll = window.pageYOffset;
+
+    // Determine the index of the current section
+    let currentSectionIndex = Array.from(sections).findIndex((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        return currentScroll >= sectionTop && currentScroll < sectionBottom;
+    });
+
+    if (event.deltaY > 0) {
+        // Scroll down
+        currentSectionIndex = Math.min(currentSectionIndex + 1, sections.length - 1);
+    } else {
+        // Scroll up
+        currentSectionIndex = Math.max(currentSectionIndex - 1, 0);
+    }
+
+    // Scroll to the target section
+    const targetSection = sections[currentSectionIndex];
+    window.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: 'smooth'
+    });
+}, { passive: false });

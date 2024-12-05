@@ -15,5 +15,30 @@
     <div class="image-side">
         <img id="myImage" src="{% static 'images/bg.png' %}">
     </div>
+</div>
 {% endblock %}
-</div>        
+{% block about_content %}
+<div class="about-section">
+    <h1>About Me</h1>
+    <div class="about">
+        <div class="image-side">
+            <img src="{% static 'images/bg.png' %}" alt="">
+        </div>
+        <div class="text-side">
+            <p>A sheep in wolf's clothing</p>
+            <p>Name : Marshall</p>
+            <p>Surname : Mutimbwa</p>
+            <p>Age : 24</p>
+        </div>
+    </div>
+    <h1>Skills</h1>
+    <div class="skills">
+
+    </div>
+    <h1>Education</h1>
+    <div class="education">
+        
+    </div>
+</div>
+{% endblock %}
+    

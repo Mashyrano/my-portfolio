@@ -11,7 +11,11 @@
     <body>
         <div class="header">
             <nav class="nav">
-                <ul>
+
+                <div class="nav-left">
+                    <i class="fa-solid fa-star icon-item"></i>
+                </div>
+                <ul class="nav-center"> 
                     <li>
                         <i class="fa-solid fa-house nav-item"></i><a href="#" class="nav-item">Home</a>                        
                     </li>
@@ -24,11 +28,16 @@
                     <li>
                         <i class="fa-solid fa-address-book nav-item"></i><a href="#" class="nav-item">Contact</a>                        
                     </li>
-                </ul>
+                </ul>           
+                <div class="nav-right">
+                    <button class="auth-button">Login</button>
+                </div>
             </nav>
         </div>
        
         {% block content %} {% endblock %}
+        {% block about_content %} {% endblock %}
+        {% block portfolio_content %} {% endblock %}
     
         <script>
             const STATIC_URL = "{% static '' %}";
