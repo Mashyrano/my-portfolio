@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="header">
@@ -24,10 +25,10 @@
                         <i class="fa-solid fa-question nav-item"></i><a href="#about" class="nav-item">About</a>                        
                     </li>
                     <li>
-                        <i class="fa-solid fa-code nav-item"></i><a href="#" class="nav-item">Projects</a>                        
+                        <i class="fa-solid fa-code nav-item"></i><a href="#projects" class="nav-item">Projects</a>                        
                     </li>
                     <li>
-                        <i class="fa-solid fa-address-book nav-item"></i><a href="#" class="nav-item">Contact</a>                        
+                        <i class="fa-solid fa-address-book nav-item"></i><a href="#contact" class="nav-item">Contact</a>                        
                     </li>
                 </ul>           
                 <div class="nav-right">
@@ -52,7 +53,7 @@
             <h1>About Me</h1>
             <div class="about">
                 <div class="image-side">
-                    <img src="{% static 'images/bg.png' %}" alt="">
+                    <img src="{% static 'images/me.jpeg' %}" alt="">
                 </div>
                 <div class="text-side">
                     <p>
@@ -75,9 +76,70 @@
         <div class="section skills-section" id="skills">
             <h1>Skills</h1>
             <div class="skills">
-                Genjustu
+                <div class="skill-card">
+                    <img src="{% static 'images/html.png'%}" alt="">
+                    <h5>HTML</h5>
+                    <h5>90%</h5>
+                </div>
+                <div class="skill-card">
+                    <img src="{% static 'images/css.png'%}" alt="">
+                    <h5>CSS</h5>
+                    <h5>75%</h5>
+                </div>
+                <div class="skill-card">
+                    <img src="{% static 'images/js.png'%}" alt="">
+                    <h5>JavaScript</h5>
+                    <h5>60%</h5>
+                </div>
+                <div class="skill-card">
+                    <img src="{% static 'images/boot.png'%}" alt="">
+                    <h5>Bootstrap</h5>
+                    <h5>70%</h5>
+                </div>
+                <div class="skill-card">
+                    <img src="{% static 'images/django.png'%}" alt="">
+                    <h5>Django</h5>
+                    <h5>65%</h5>
+                </div>
+                <div class="skill-card">
+                    <img src="{% static 'images/flask.png'%}" alt="">
+                    <h5>Flask</h5>
+                    <h5>90%</h5>
+                </div>
             </div>
-        </div>    
+        </div>   
+        
+        <div class="section education-section" id="education">
+            <h1>Education</h1>
+            <div class="education">
+                <div class="education-card">
+                    <img src="{% static 'images/ALX.png'%}" alt="">
+                    <h3>ALX AI and Career Essentials</h3>
+                    <h4>Graduated: April 2024</h4>
+                    <h4>Duration: 3 months</h4>                    
+                </div>
+                <div class="education-card">
+                    <img src="{% static 'images/ALX.png'%}" alt="">
+                    <h3>ALX AI and Career Essentials</h3>
+                    <h4>Graduated: April 2024</h4>
+                    <h4>Duration: 3 months</h4>                    
+                </div>
+            </div>
+        </div>  
+
+        <div class="section projects-section" id="projects">
+            <h1>Projects</h1>
+            <div class="projects">
+                N Queens
+            </div>
+        </div>  
+
+        <div class="section contact-section" id="contact">
+            <h1>Contact</h1>
+            <div class="contact">
+                Email
+            </div>
+        </div>  
 
         <script>
             const STATIC_URL = "{% static '' %}";

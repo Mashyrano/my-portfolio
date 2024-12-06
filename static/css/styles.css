@@ -2,6 +2,11 @@
     margin: 0;
     padding: 0;
 }
+
+h1, a {
+    font-family: "Matemasie", serif;
+}
+
 /*header*/
 .header {
     position: fixed;
@@ -18,6 +23,20 @@ nav {
     height: 15vh; /* Set a consistent height */
     padding: 0 20px; /* Add some spacing around the edges */
 }
+
+.icon-item {
+    font-size: 1em; /* Default size */
+    color: white; /* Default color */
+    transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.icon-item:hover {
+    font-size: 2em; /* Enlarge the icon */
+    color: rgb(233, 126, 126); /* Change color */
+    transform: rotate(10deg); /* Add a slight rotation for effect */
+}
+
 
 .nav-left,
 .nav-right {
@@ -59,6 +78,10 @@ nav {
     width: 100%; /* Full width of the link */
 }
 
+.nav-center.anime li a::after {
+    background-color: black;
+}
+
 .nav-left i,
 .nav-center li i {
     color: white;
@@ -90,13 +113,20 @@ nav {
     transition: width 0.3s ease; /* Smooth underline transition */
 }
 
+.nav-center.anime li a.active::after {
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    transition: width 0.3s ease; /* Smooth underline transition */
+}
+
+
 
 /*home*/
 
 .home-section{
     background: linear-gradient(to right bottom, black , white );
     height: 85vh; 
-    padding-top: 200px;
+    padding-top: 250px;
     padding-left: 50px;
     display: flex;
     justify-content: center;
@@ -169,6 +199,9 @@ nav {
 .about .image-side img {
     border: 5px solid black;
     padding: 20px;
+    width: auto;
+    height: 350px;
+    display: block;
 }
 
 .about .text-side {
@@ -178,6 +211,7 @@ nav {
 }
 
 /*Skills*/
+
 .skills-section {
     background-color: rgba(31, 29, 29, 0.996);
     /* height: 100vh; */
@@ -190,6 +224,184 @@ nav {
 }
 
 .skills {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.skill-card {
+    background-color: bisque;
+    border: 1px solid rgb(152, 84, 0);
+    margin: 5px;
+    border-radius: 25%;
+    position: relative;
+    overflow: hidden; /* To ensure the fill doesn't overflow the card */
+    width: 150px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    transition: transform 0.3s ease; /* Smooth animation for hover */
+}
+
+.skill-card img {
+    width: auto; /* Maintain aspect ratio */
+    height: 80px; /* Set a consistent height */
+    display: block; /* Center the image within the card */
+    margin: 10px auto; /* Add some spacing and center the image */
+    object-fit: contain; /* Ensure the image fits within the dimensions without distortion */
+}
+
+.skill-card h5, 
+.skill-card h6 {
+    text-align: center;
+    position: relative; /* Ensure they are above the fill */
+    z-index: 2; /* Keep text above the translucent fill */
+}
+
+/* Translucent fill effect */
+.skill-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 60%; /* Percentage skill level (adjust this dynamically for each skill) */
+    background-color: rgba(0, 0, 0, 0.2); /* Translucent black fill */
+    z-index: 1; /* Below the text but above the background */
+    transition: height 0.5s ease; /* Smooth fill animation */
+}
+
+/* Shake animation on hover */
+.skill-card:hover {
+    transform: rotate(-3deg) translateX(5px); /* Small shake effect */
+    animation: shake 0.5s ease-in-out; /* Reference the shake animation */
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+
+
+/*Education*/
+
+.education-section {
+    background-color: rgb(210, 210, 210);
+    /* height: 100vh; */
+}
+
+.education-section h1 {
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(49, 49, 48);
+}
+
+.education {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.education-card {
+    background-color: rgb(49, 49, 48);
+    padding-bottom: 20px;
+    border-radius: 10%;
+    overflow: hidden;
+    height: 300px;
+    margin: 0 20px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.education-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4); /* Add a stronger shadow */
+}
+
+.education-card img {
+    display: block;
+    width: auto;
+    height: 200px;
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
+}
+
+.education-card:hover img {
+    transform: rotate(-5deg) scale(1.1); /* Rotate and enlarge the image */
+}
+
+.education-card h3,
+.education-card h4 {
+    padding: 5px;
+    text-align: center;
+    color: rgb(210, 210, 210);
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.education-card:hover h3,
+.education-card:hover h4 {
+    color: rgb(255, 255, 255); /* Lighten text color on hover */
+}
+
+.education-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 128, 128, 0.2), rgba(255, 255, 255, 0.1));
+    z-index: 0;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.education-card:hover::before {
+    opacity: 1; /* Make the gradient overlay visible on hover */
+}
+
+
+/*Projects*/
+
+.projects-section {
+    background-color: rgb(51, 51, 51);
+    /* height: 100vh; */
+}
+
+.projects-section h1 {
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(248, 248, 218);
+}
+
+.projects {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+/*Contact*/
+
+.contact-section {
+    background-color: rgb(210, 210, 210);
+    /* height: 100vh; */
+}
+
+.contact-section h1 {
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(49, 49, 48);
+}
+
+.contact {    
     display: flex;
     justify-content: center;
     align-items: center;

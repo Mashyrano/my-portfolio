@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-item');
     const sectionMapping = {
         home: ['home'],
-        about: ['about', 'skills'],
+        about: ['about', 'skills', 'education'],
         projects: ['projects'],
         contact: ['contact'],
     };
@@ -85,19 +85,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 $(document).ready(function () {
-    $('#myImage').mouseenter(function () {
-        $('#myImage').attr("src", bg2);
-        $('.nav').css('background', 'linear-gradient(180deg, red, white)');
-        $('.nav-item').css('color','black');
-        $('.home-section').css('background', 'linear-gradient(white, red)');
-    });
-    $('#myImage').mouseleave(function () {
-        $('#myImage').attr("src", bg1);
-        $('.nav').css('background-color','black');
-        $('.nav-item').css('color','white');
-        $('.home-section').css('background', 'linear-gradient(to right bottom, black, white)');
-        $('.nav').css('background', 'black');
-    });
-
+    let toggled = false;
+    $('.icon-item').click(function () {
+        if (!toggled) {
+            $('#myImage').attr("src", bg2);
+            $('.nav').css('background', 'linear-gradient(180deg, red, white)');
+            $('.nav-item').css('color','black');
+            $('.home-section').css('background', 'linear-gradient(white, red)');   
+        } else {
+            $('#myImage').attr("src", bg1);
+            $('.nav').css('background-color','black');
+            $('.nav-item').css('color','white');
+            $('.home-section').css('background', 'linear-gradient(to right bottom, black, white)');
+            $('.nav').css('background', 'black');           
+        }
+        toggled = !toggled;
+        $('.nav-center').toggleClass('anime');
+    })      
 });
 
