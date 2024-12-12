@@ -1,6 +1,18 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from .models import About, Skill, Education, Project
+from math import ceil
 
-# Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    about = About.objects.first()
+    skills = Skill.objects.all()
+    educations = Education.objects.all()
+    for education in educations:
+        education.duration = ceil((education.end_date - education.start_date).days / 30)
+    projects = Project.objects.all()
+
+    return render(request, 'home.html', {
+        'about': about,
+        'skills': skills,
+        'educations': educations,
+        'projects': projects,
+    })
