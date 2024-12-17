@@ -10,9 +10,12 @@ def home(request):
         education.duration = ceil((education.end_date - education.start_date).days / 30)
     projects = Project.objects.all()
 
+    # Group projects into chunks of 3
+    project_chunks = [projects[i:i+3] for i in range(0, len(projects), 3)]
+
     return render(request, 'home.html', {
         'about': about,
         'skills': skills,
         'educations': educations,
-        'projects': projects,
+        'project_chunks': project_chunks,
     })
