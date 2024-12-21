@@ -119,7 +119,65 @@ nav {
     transition: width 0.3s ease; /* Smooth underline transition */
 }
 
+.nav-right {
+    display: flex;
+}
 
+.hamburger {
+    display: none; /* Hidden by default */
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
+    z-index: 1002;
+}
+
+/* ===================== Responsive Styles ====================== */
+@media (max-width: 895px) {
+    .nav-center {
+        display: none; /* Hide nav links */
+        flex-direction: column;
+        position: absolute;
+        top: 15vh; /* Below the navbar */
+        left: 0;
+        width: 250px;
+        background-color: rgba(2, 0, 36, 0.6);
+        padding: 20px 0;
+        z-index: 1000;
+        padding-top: 50px;
+        margin-left: -50px;
+    }
+
+    .nav-center.show {
+        display: block; /* Show links when toggled was flex to center*/
+        padding-left: 60px;
+    }
+    
+    .nav-center li a{
+        line-height: 3rem;
+    }
+
+    .nav-right {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 15vh; /* Place above the links */
+        right: 40;
+        width: 0%; /* Stretch login button to full width */
+        justify-content: center; /* Center the login button */
+        z-index: 1001; /* Higher than links, but below hamburger */
+        background-color: rgba(2, 0, 36, 0.1); /* Same background as links */
+        padding: 10px 0;
+        
+    }
+
+    .nav-right.show {
+        display: block; /* Show login button when toggled */
+        padding-left: 30px;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger icon */
+    }
+}
 
 /*home*/
 
@@ -176,34 +234,37 @@ nav {
     padding-top: 40px;
 }
 
-@media screen  and (max-width:570px) {
+
+@media (max-width: 1044px) {
     .home-section {
-        display: block;
-        padding-top: 80px;
+        display: flex;
+        justify-content: center;
     }
-    
+
     .home-section .text-side {
-        padding-bottom: 70px
-    }    
-    .nav {
-        display: block;
-    }
-    .nav-center {
-        margin: 20px;
+        margin: 0;
+        padding: 0;
     }
 }
 
-@media screen  and (max-width:860px) {
-    .nav-center {
+@media (max-width: 510px) {
+    .home-section{
         display: block;
-    }    
+        margin-top: -70px;
+        height: 130vh;
+    }
+    .home-section .text-side {
+        margin-bottom: 60px;
+    }
+
+    .home-section .image-side{
+        margin: 0;
+    }
+
+    .diffe {
+        border: none;
+    }
     
-    .nav-center li a {
-        line-height: 10vh;  
-    }
-    .nav {
-        height: 60vh;
-    }
 }
 
 /* About */
@@ -263,6 +324,47 @@ nav {
     background-color:  rgba(210, 207, 207, 0.996);
     border: 2px solid black;
 }
+
+@media (max-width: 1030px) {
+    .about .text-side{
+        font-size: medium;
+    }
+}
+
+@media (max-width: 750px) {
+    .about .image-side img{
+        height: 300px;
+    }
+
+    .about .image-side {
+        margin-right: 50px;
+    }
+
+}
+
+@media (max-width: 650px) {
+    .about-section {
+        height: 140vh;
+        padding-left: 20px;
+    }
+
+    .about {
+        display: block;
+    }
+
+    .about .text-side {
+        width: 100%;
+        padding-top: 20px;
+        font-size: large;
+    }
+
+    .about .image-side {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
 
 /*Skills*/
 
@@ -341,7 +443,33 @@ nav {
     75% { transform: rotate(-3deg); }
 }
 
+@media (max-width: 975px) {
 
+    .skills {
+        margin: 0;
+    }
+
+    .skills-section h1 {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .skills-section{
+        height: 120vh;
+    }
+    .skills-section h1 {
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 350px ) {
+
+    .skills-section{
+        height: 200vh;
+    }
+}
 
 /*Education*/
 
@@ -358,6 +486,7 @@ nav {
 
 .education {    
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     height: 85vh;
@@ -370,6 +499,7 @@ nav {
     border-radius: 10%;
     overflow: hidden;
     height: 350px;
+    width: 350px;
     margin: 0 20px;
     position: relative;
     box-shadow: 0 4px 6px rgb(44, 44, 46);
@@ -384,10 +514,11 @@ nav {
 
 .education-card img {
     display: block;
-    width: auto;
-    height: 200px;
+    width: 350px;
+    height: 185px;
     margin-bottom: 20px;
     transition: transform 0.5s ease;
+    object-fit: cover;
 }
 
 .education-card:hover img {
@@ -425,6 +556,26 @@ nav {
 .education-card:hover::before {
     opacity: 1; /* Make the gradient overlay visible on hover */
 }
+
+@media (max-width: 800px) {
+
+    .education-section {
+        height: 140vh;
+    }
+
+    .education-section h1 {
+        padding-bottom: 30px;
+    }
+
+    .education {
+        margin: 0;
+    }
+
+    .education-card {
+        margin-bottom: 40px;
+    }
+}
+
 
 
 /*Projects*/
@@ -597,3 +748,40 @@ button.custom-bg:hover {
     color: rgb(2,0,36);
 }
 
+@media (max-width: 760px) {
+    .contact {
+        display: block;
+        height: 130vh;
+    }    
+
+    .contact-section h1 {
+        margin-bottom: 70px;
+    }
+
+    .contact .left-side, 
+    .contact .right-side {
+        display: flex;
+        justify-content: center;
+        margin: 50px 0;
+    }
+
+    .contact .right-side {
+        margin-left: -60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .contact .left-side {
+        font-size: small;
+    }
+    .contact .left-side p{
+        width: 250px;
+    }
+
+    input.custom-bg, textarea.custom-bg{
+        width: 250px;
+    }
+    .contact .right-side {
+        margin-left: 20px;
+    }
+}

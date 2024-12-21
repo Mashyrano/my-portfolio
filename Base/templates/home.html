@@ -12,36 +12,83 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-        
         <title>Portfolio</title>
     </head>
     <body>
         <div class="header">
             <nav class="nav">
-
                 <div class="nav-left">
                     <i class="fa-solid fa-star icon-item"></i>
                 </div>
-                <ul class="nav-center"> 
+        
+                <!-- Hamburger Menu -->
+                <div class="hamburger" id="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+        
+                <ul class="nav-center" id="nav-links">
                     <li>
-                        <i class="fa-solid fa-house nav-item"></i><a href="#home" class="nav-item active">Home</a>                        
+                        <i class="fa-solid fa-house nav-item"></i><a href="#home" class="nav-item active">Home</a>
                     </li>
                     <li>
-                        <i class="fa-solid fa-question nav-item"></i><a href="#about" class="nav-item">About</a>                        
+                        <i class="fa-solid fa-question nav-item"></i><a href="#about" class="nav-item">About</a>
                     </li>
                     <li>
-                        <i class="fa-solid fa-code nav-item"></i><a href="#projects" class="nav-item">Projects</a>                        
+                        <i class="fa-solid fa-code nav-item"></i><a href="#projects" class="nav-item">Projects</a>
                     </li>
                     <li>
-                        <i class="fa-solid fa-address-book nav-item"></i><a href="#contact" class="nav-item">Contact</a>                        
+                        <i class="fa-solid fa-address-book nav-item"></i><a href="#contact" class="nav-item">Contact</a>
                     </li>
-                </ul>           
+                </ul>
+        
                 <div class="nav-right">
-                    <button class="auth-button">Login</button>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="auth-button">Logout</button>
+                    </form>
+                    {% else %}
+                        <button class="auth-button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    {% endif %}
                 </div>
             </nav>
-        </div>
+        </div>     
 
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" 
+        data-show-modal="{% if show_login_modal %}true{% else %}false{% endif %}">
+       <div class="modal-dialog">
+           <div class="modal-content bg-dark text-light">
+               <div class="modal-header">
+                   <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <form method="POST" action="{% url 'login' %}">
+                       {% csrf_token %}
+                       <div class="mb-3">
+                           <label for="name" class="form-label text-light">Username</label>
+                           <input type="text" name="name" class="form-control bg-dark text-light" id="name">
+                       </div>
+                       <div class="mb-3">
+                           <label for="password" class="form-label text-light">Password</label>
+                           <input type="password" name="password" class="form-control bg-dark text-light" id="password">
+                       </div>
+                       <button type="submit" class="btn btn-primary">Login</button>
+                   </form>
+                   {% if messages %}
+                   <div class="mt-3">
+                       {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }}">
+                           {{ message }}
+                       </div>
+                       {% endfor %}
+                   </div>
+                   {% endif %}
+               </div>
+           </div>
+       </div>
+   </div>
+   
         <div class="section home-section" id="home">
             <div class="text-side">
                 <h3>Hello</h3>
@@ -94,7 +141,7 @@
                 <div class="education-card">
                     <img src="{{ education.image.url}}" alt="">
                     <h4>{{ education.name}}</h4>
-                    <h5>Graduated: {{ education.start_date}}</h5>
+                    <h5>Graduated: {{ education.end_date}}</h5>
                     <h5>Duration: {{ education.duration}} months</h5>                    
                 </div>    
                 {% endfor %}            
@@ -140,24 +187,26 @@
             <h1>Contact</h1>            
             <div class="contact">
                 <div class="left-side">
-                    <h2>Have a project in mind?</h2>
-                    <h2>You want some work done?</h2>
-                    <p>
-                        Leave a message and I will respond as soon as possible.
-                        If you prefer to contact me directly, send your email to :<br>
-                        <b>mashymtimbwa7@gmail.com</b>
-                    </p>
-                    <ul>
-                        <li> <i class="fa-brands fa-linkedin-in"></i> </li>
-                        <li> <i class="fa-brands fa-twitter"></i> </li>
-                        <li> <i class="fa-brands fa-instagram"></i> </li>
-                    </ul>                    
+                    <div>
+                        <h2>Have a project in mind?</h2>
+                        <h2>You want some work done?</h2>
+                        <p>
+                            Leave a message and I will respond as soon as possible.
+                            If you prefer to contact me directly, send your email to :<br>
+                            <b>mashymtimbwa7@gmail.com</b>
+                        </p>
+                        <ul>
+                            <li> <i class="fa-brands fa-linkedin-in"></i> </li>
+                            <li> <i class="fa-brands fa-twitter"></i> </li>
+                            <li> <i class="fa-brands fa-instagram"></i> </li>
+                        </ul>   
+                    </div>                 
                 </div>
                 <div class="right-side">
                     <form>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control custom-bg" id="name">
+                            <input type="text" class="form-control custom-bg" id="fname">
                         </div>
                         
                       <div class="mb-3">
@@ -178,5 +227,5 @@
         <script src="{% static 'js/script.js' %}"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    </body>
+ </body>
 </html>

@@ -83,3 +83,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links'); // Links container
+    const navRight = document.querySelector('.nav-right'); // Login button
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show'); // Toggle nav links visibility
+        navRight.classList.toggle('show'); // Toggle login button visibility
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const loginModalElement = document.getElementById('loginModal');
+    if (loginModalElement && loginModalElement.dataset.showModal === 'true') {
+        const loginModal = new bootstrap.Modal(loginModalElement);
+        loginModal.show();
+    }
+});
