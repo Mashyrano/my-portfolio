@@ -785,3 +785,28 @@ button.custom-bg:hover {
         margin-left: 20px;
     }
 }
+
+/*==============Edit================*/
+
+.scrollable {
+    width: 500px;
+    height: 400px; /* Explicit height to allow scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 2px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    flex-shrink: 0; /* Prevent shrinking in flex containers */
+}
+
+.edit {
+    height: 85vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Avoid centering child elements */
+    gap: 10px;
+}
+
+
+
+

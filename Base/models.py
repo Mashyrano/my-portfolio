@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import DateTimeField
 
 class About(models.Model):
     story = models.TextField()
@@ -23,3 +24,9 @@ class Project(models.Model):
     image = models.ImageField(upload_to='Project/')
     description = models.TextField()
     link = models.URLField(max_length=200)  # Use URLField for validation
+
+class Message(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True, null=True)
