@@ -4,21 +4,15 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">  
-        <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Matemasie&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />  
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}" />
         <title>Portfolio</title>
     </head>
     <body>
         <div class="header">
             <nav class="nav">
                 <div class="nav-left">
-                    <i class="fa-solid fa-star icon-item"></i>
+                    <a href="#"><i class="fa-solid fa-star icon-item"></i></a>
                 </div>
         
                 <!-- Hamburger Menu -->
@@ -39,6 +33,11 @@
                     <li>
                         <i class="fa-solid fa-address-book nav-item"></i><a href="#contact" class="nav-item">Contact</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <i class="fa-solid fa-address-book nav-item"></i><a href="#edit" class="nav-item">Edit</a>
+                    </li>
+                    {% endif %}
                 </ul>
         
                 <div class="nav-right">
@@ -78,9 +77,11 @@
                    {% if messages %}
                    <div class="mt-3">
                        {% for message in messages %}
+                         {% if 'login' in message.tags %}
                        <div class="alert alert-{{ message.tags }}">
                            {{ message }}
                        </div>
+                         {% endif %}
                        {% endfor %}
                    </div>
                    {% endif %}
@@ -88,6 +89,32 @@
            </div>
        </div>
    </div>
+
+   <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true" 
+        data-show-modal="{% if show_newMessage_modal %}true{% else %}false{% endif %}">
+       <div class="modal-dialog">
+           <div class="modal-content bg-dark text-light">
+               <div class="modal-header">
+                   <h5 class="modal-title" id="messageModalLabel">Message Status</h5>
+                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">                   
+                   {% if messages %}
+                   <div class="mt-3">
+                       {% for message in messages %}
+                         {% if 'leave_message' in message.tags %}
+                       <div class="alert alert-{{ message.tags }}">
+                           {{ message }}
+                       </div>
+                         {% endif %}
+                       {% endfor %}
+                   </div>
+                   {% endif %}
+               </div>
+           </div>
+       </div>
+   </div>
+
    
         <div class="section home-section" id="home">
             <div class="text-side">
@@ -116,7 +143,9 @@
                     <p>Surname : {{ about.surname }}</p>
                     <p>Age : {{ about.age }}</p>
                     <br>
-                    <button class="btn-cv">Download CV</button>
+                    <form method="GET" action="{{ MEDIA_URL }}cv/Marshall Mutimbwa CV.pdf">
+                        <button type="submit" class="btn-cv" id="btn-cv">Download My CV</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -203,15 +232,16 @@
                     </div>                 
                 </div>
                 <div class="right-side">
-                    <form>
+                    <form method="POST" action="{% url 'message' %}">
+                        {% csrf_token %}
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control custom-bg" id="fname">
+                            <input type="text" class="form-control custom-bg" id="fname" name="fname">
                         </div>
                         
                       <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" class="form-control custom-bg" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" class="form-control custom-bg" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
                       </div>
                       
                       <div class="mb-3">
@@ -224,8 +254,168 @@
             </div>
         </div>  
 
+        {% if user.is_authenticated %}
+        <div class="section edit-section" id="edit" style="background-color: rgb(232, 43, 166);">
+            <h1>Admin</h1>
+            <div class="edit">
+                <div class="scrollable">
+                    {% for message in my_messages %}
+                    <div class="message-item">
+                        <p><strong>{{ message.date }}</strong></p>
+                        <p>From: {{ message.name }} ({{ message.email }})</p>
+                        <p>{{ message.message }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>      
+
+        <div class="section edit-skills-section" id="edit-skills">
+            <h1>Manage Skills</h1>            
+            <div class="edit-skills">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Skill</th>
+                        <th>Level</th>
+                        <th>Image</th>
+                    </tr>
+                    <form method="post" action="{% url 'create_skill' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" name="name" placeholder="new name"> 
+                        <input type="text" name="level" placeholder="new level"> 
+                        <input type="file" name="image" >
+                        <button type="submit">Create</button>
+                    </form>
+                    {% for skill in skills%}
+                    <tr>
+                        <form method="post" action="{% url 'update_skill' skill.pk %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="skill-form">
+                                <td>
+                                    <img src="{{ skill.image.url  }}" style="height: 100px; width: 100px;" alt="">
+                                </td>
+                                <td>
+                                    <input type="text" name="name" value="{{ skill.name }}">
+                                </td>
+                                <td>
+                                    <input type="text" name="level" value="{{ skill.level }}">
+                                </td>
+                                <td>
+                                    <input type="file" name="image" >
+                                </td>
+                                <td>
+                                    <button type="submit">Update</button>
+                                </td>
+                            </form>
+                                <td>
+                                    <form method="post" action="{% url 'delete_skill' skill.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </td>                              
+                            </div>
+                        
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+
+            <div class="section edit-me-section mt-3" style="background-color: burlywood;">
+                <h1>Manage Me</h1>           
+                <div class="edit-me">
+                    <form method="post" action="{% url 'edit_me' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <textarea name="story" cols="50" rows="10">{{about.story}}</textarea>
+                        <p>Name : <input type="text" name="name" value="{{about.name}}"></p>
+                        <p>Surname : <input type="text" name="surname" value="{{about.surname}}"></p>
+                        <p>Age : <input type="text" name="age" value="{{about.age}}"></p>
+                        <p>Image : <input type="file" name="image"></p>
+                        <button type="submit">Update</button>
+                    </form>                    
+                </div>
+            </div> 
+        
+            {% endif %}
+
+        {% if user.is_authenticated %}
+        <div class="section edit-project-section mt-3" id="edit-project">
+            <h1>Manage Projects</h1>           
+            <div class="edit-project" style="display: flex; flex-wrap: wrap; gap: 5px;">
+
+                <div class="pcard-body">
+                    <form method="post" action="{% url 'create_project' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p><input type="text" name="name" placeholder="project name"></p>
+                        <p><textarea name="description" rows="5" cols="30" placeholder="description of project"></textarea></p>
+                        <!-- <p><input type="text" name="description" value="{{project.description}}"></p> -->
+                        <p><input type="text" name="link" placeholder="github link"></p>
+                        <p><input type="file" name="image" placeholder="snapshot"></p>
+                        <button type="submit">Create New</button> 
+                    </form>                    
+                </div>
+
+                {% for project in projects %}
+                <div class="pcard" style="border: 2px dotted blue;">
+                    <img src="{{ project.image.url }}" alt="" style="height: 150px; width: 150px;">
+                    <div class="pcard-body">
+                        <form method="post" action="{% url 'update_project' project.pk %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p><input type="text" name="name" value="{{project.name}}"></p>
+                            <p><textarea name="description" rows="5" cols="30">{{project.description}}</textarea></p>
+                            <!-- <p><input type="text" name="description" value="{{project.description}}"></p> -->
+                            <p><input type="text" name="link" value="{{project.link}}"></p>
+                            <p><input type="file" name="image"></p>
+                            <button type="submit">Update</button> 
+                        </form>
+                        <form method="post" action="{% url 'delete_project' project.pk %}">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div> 
+
+        <div class="section edit-education-section mt-3" style="background-color: rgb(108, 214, 238); min-height: 80vh;">
+            <h1>Manage Education</h1>           
+            <div class="edit-education"  style="display: flex; flex-wrap: wrap; gap: 5px;">
+                <form method="post" action="{% url 'create_education' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="ed-card"  style="border: 2px solid gold;">
+                        <p>Name <input type="text" name="name"></p>
+                        <p>Start Date <input type="date" name="start_date"></p>
+                        <p>End Date <input type="date" name="end_date"></p>
+                        Image <input type="file" name="image">
+                        <p><Button type="submit">Create</Button></p>
+                    </div>
+                </form>
+                {% for education in educations%}
+                <form method="post" action="{% url 'edit_education' education.pk%}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="ed-card mb-3"  style="border: 2px solid gold;">
+                    <img src="{{education.image.url}}" alt="" style="height: 150px; width: 150px;">
+                    <p>Name <input type="text" name="name" value="{{education.name}}"></p>
+                    <p>Start Date <input type="date" name="start_date">  {{education.start_date}}</p>
+                    <p>End Date <input type="date" name="end_date">  {{education.end_date}}</p>
+                    Image <input type="file" name="image">
+                    <p><button type="submit"> Edit </button></p>
+                </form>
+                <form method="post" action="{% url 'delete_education' education.pk%}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+                </div>              
+                
+                {% endfor %}
+            </div>
+        </div> 
+
+        {% endif %}
+
         <script src="{% static 'js/script.js' %}"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
  </body>
 </html>
