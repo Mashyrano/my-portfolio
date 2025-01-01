@@ -738,12 +738,13 @@ button.custom-bg:hover {
     list-style: none;
 }
 
-.contact .left-side ul li i {
+.contact .left-side ul li a {
     font-size: 2rem;
     cursor: pointer;
+    color: rgb(48, 48, 52);
 }
 
-.contact .left-side ul li i:hover {
+.contact .left-side ul li a:hover {
     scale: 1.2;
     color: rgb(2,0,36);
 }
